@@ -1,11 +1,16 @@
 package com.model;
 
+import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
-public class User {
 
+@Entity
+@Table(name= "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NonNull
     private String firstName;

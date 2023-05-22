@@ -1,23 +1,38 @@
 package com.model;
 
+import org.springframework.lang.NonNull;
+
 import java.util.Objects;
 
 public class User {
+
+    private Long id;
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
+    @NonNull
     private Integer age;
+    @NonNull
     private String country;
 
     public User(){
         super();
     }
-    public User(String firstName, String lastName, Integer age, String country) {
+    public User(Long id, String firstName, String lastName, Integer age, String country) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.country = country;
     }
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -55,18 +70,19 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && country.equals(user.country);
+        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && country.equals(user.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, age, country);
+        return Objects.hash(id, firstName, lastName, age, country);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", country='" + country + '\'' +

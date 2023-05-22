@@ -1,36 +1,26 @@
 package com.service.impl;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.model.User;
 import com.repository.UserRepository;
 import com.service.UserService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class UserServiceImpl implements UserService {
+import com.model.User;
+import com.repository.UserRepository;
+import com.service.UserService;
 
-    public static List<User> usersList = new ArrayList<>();
-    private static Long COUNTER = 1l;
+@Service
+@Transactional
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
 
-    static{
-        User user = new User(COUNTER++,"Jan", "Kowalski", 23, "Poland");
-        usersList.add(user);
-        user = new User(COUNTER++, "Rick", "Salmon", 35, "USA");
-        usersList.add(user);
-        user = new User(COUNTER++,"Sasha", "Madej", 39, "Ukraine");
-        usersList.add(user);
-        user = new User(COUNTER++, "Amy", "Silva", 21, "Brazil");
-        usersList.add(user);
-    }
     @Override
     public List<User> findAll() {
         return userRepository.findAll();

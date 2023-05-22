@@ -1,6 +1,8 @@
 package com.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import org.springframework.lang.NonNull;
 
 import java.util.Objects;
@@ -12,32 +14,31 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NonNull
+
+    @NotNull
     private String firstName;
-    @NonNull
+    @NotNull
     private String lastName;
-    @NonNull
+    @NotNull
     private Integer age;
-    @NonNull
+    @NotNull
     private String country;
 
     public User(){
         super();
     }
-    public User(Long id, String firstName, String lastName, Integer age, String country) {
-        this.id = id;
+    public User(String firstName, String lastName, Integer age, String country) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.country = country;
     }
-    public Long getId() {
+    public long getId(){
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     public String getFirstName() {
         return firstName;
     }

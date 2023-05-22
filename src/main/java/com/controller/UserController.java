@@ -22,7 +22,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<?> findAll() {
-        return new ResponseEntity<List<User>>(userService.findAll(),HttpStatus.OK);
+
+        return new ResponseEntity<List<User>>(userService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

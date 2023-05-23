@@ -2,11 +2,7 @@ package com.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
-import org.springframework.lang.NonNull;
-
 import java.util.Objects;
-
 
 @Entity
 @Table(name= "users")
@@ -14,6 +10,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    private String username;
+    @NotNull
+    private String password;
 
     @NotNull
     private String firstName;
@@ -27,8 +27,10 @@ public class User {
     public User(){
         super();
     }
-    public User(String firstName, String lastName, Integer age, String country) {
+    public User(String username, String password,String firstName, String lastName, Integer age, String country) {
         super();
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -38,7 +40,21 @@ public class User {
         return id;
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -54,6 +70,7 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
     public Integer getAge() {
         return age;
@@ -76,12 +93,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && country.equals(user.country);
+        return Objects.equals(id, user.id) && username.equals(user.username) && password.equals(user.password) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && country.equals(user.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age, country);
+        return Objects.hash(id, username, password, firstName, lastName, age, country);
     }
 
     @Override
